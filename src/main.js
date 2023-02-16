@@ -1,9 +1,21 @@
 "use strict"
 
-for (let i = 0; i < 10; i++) {
+let age = 21; // возьмём для примера 16
 
-    // если true, пропустить оставшуюся часть тела цикла
-    if (i % 2 == 0) continue;
+if (age < 18) {
+    welcome(); // \   (выполнится)
+    //  |
+    function welcome() { //  |
+        console.log("Привет!"); //  |  Function Declaration доступно
+    } //  |  во всём блоке кода, в котором объявлено
+    //  |
+    welcome(); // /   (выполнится)
 
-        console.log(i); // 1, затем 3, 5, 7, 9
-  }
+} else {
+
+    function welcome() {
+        console.log("Здравствуйте!");
+    }
+
+    welcome()
+}
