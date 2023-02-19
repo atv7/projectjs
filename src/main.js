@@ -1,8 +1,9 @@
 "use strict"
 
+/* 
+Создайте скрипт, который запрашивает ввод двух чисел (используйте prompt) и после показывает их сумму.
+*/
 
-function evenOrOdd(number) {
-  let bol = (number % 2 == 0) ? true : false
-  return bol ? 'Even' : "Odd"
-  
-}
+let a = prompt('aga', '');
+
+alert(a);
