@@ -8,9 +8,9 @@
 */
 
 function groupById(arr) {
-  return arr.reduce((object, user) => {
-    object[user.id] = user;
-    return object;
+  return arr.reduce((obj, user) => {
+    obj[user.id] = user;
+    return obj;
   }, {});
 }
 

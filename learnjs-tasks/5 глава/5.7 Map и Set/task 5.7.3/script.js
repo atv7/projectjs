@@ -1,29 +1,19 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
-
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
-
+Мы хотели бы получить массив ключей map.keys() в переменную и далее работать с ними,
+ например, применить метод .push.
+Но это не выходит
+Почему? Что нужно поправить в коде, чтобы вызов keys.push сработал?
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
-}
+let map = new Map();
 
-let accumulator = new Accumulator(1); // начальное значение 1
+map.set("name", "John");
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let keys = Array.from(map.keys()); //добавляем Array.from()
 
-alert(accumulator.value); // выведет сумму этих значений
+// Error: keys.push is not a function
+// Ошибка: keys.push -- это не функция
+keys.push("more");
+// Так произошло, потому что map.keys() возвращает итерируемый объект. Нужно преобразовать его в массив

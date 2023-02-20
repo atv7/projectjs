@@ -1,29 +1,21 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
-
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.
+Из каждой группы анаграмм должно остаться только одно слово, не важно какое.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
+function aclean(arr) {
+  let obj = {};
+  for (let word of arr) {
+    let sorted = word.toLowerCase().split('').sort().join('');
+
+    obj[sorted] = word;
   }
+  return Object.values(obj);
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+console.log( aclean(arr) ); 

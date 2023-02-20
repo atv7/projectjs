@@ -1,9 +1,5 @@
 "use strict"
 
-/* 
-Создайте скрипт, который запрашивает ввод двух чисел (используйте prompt) и после показывает их сумму.
-*/
+let set = new Set('abc');
 
-let a = prompt('aga', '');
-
-alert(a);
+console.log(set);
