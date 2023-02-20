@@ -1,29 +1,27 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+У вас есть массив объектов user, и у каждого из объектов есть name, surname и id.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
-
+Напишите код, который создаст ещё один массив объектов с параметрами id и fullName, где fullName
+ – состоит из name и surname.
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
-}
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let users = [ vasya, petya, masha ];
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let usersMapped = users.map(item => ( { fullName : `${item.name} ${item.surname}`, id : item.id}));
 
-alert(accumulator.value); // выведет сумму этих значений
+/*
+usersMapped = [
+  { fullName: "Вася Пупкин", id: 1 },
+  { fullName: "Петя Иванов", id: 2 },
+  { fullName: "Маша Петрова", id: 3 }
+]
+*/
+
+console.log( usersMapped[0].id ) // 1
+console.log( usersMapped[0].fullName ) // Вася Пупкин

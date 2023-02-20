@@ -1,29 +1,23 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Напишите функцию filterRangeInPlace(arr, a, b), которая принимает массив arr и удаляет 
+из него все значения кроме тех, которые находятся между a и b. То есть, проверка имеет вид a ≤ arr[i] ≤ b.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Функция должна изменять принимаемый массив и ничего не возвращать.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
+function filterRangeInPlace(arr, a, b) {
+  for (let i = 0; i < arr.length; i++) {
+    if ((a <= arr[i] <= b)) {
+      arr.splice(i, 1);
+    }
   }
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let arr = [5, 3, 8, 1];
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
 
-alert(accumulator.value); // выведет сумму этих значений
+console.log( arr ); // [3, 1]

@@ -1,29 +1,34 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Допустим, мы получили массив пользователей в виде {id:..., name:..., age:... }.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
-
+Создайте функцию groupById(arr), которая создаст из него объект с id в качестве ключа и 
+элементами массива в качестве значений.
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+function groupById(arr) {
+  return arr.reduce((object, user) => {
+    object[user.id] = user;
+    return object;
+  }, {});
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let users = [
+  {id: 'john', name: "John Smith", age: 20},
+  {id: 'ann', name: "Ann Smith", age: 24},
+  {id: 'pete', name: "Pete Peterson", age: 31},
+];
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let usersById = groupById(users);
+console.log(usersById)
 
-alert(accumulator.value); // выведет сумму этих значений
+/*
+// после вызова у нас должно получиться:
+
+usersById = {
+  john: {id: 'john', name: "John Smith", age: 20},
+  ann: {id: 'ann', name: "Ann Smith", age: 24},
+  pete: {id: 'pete', name: "Pete Peterson", age: 31},
+}
+*/

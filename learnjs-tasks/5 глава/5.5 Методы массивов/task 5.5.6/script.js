@@ -1,29 +1,43 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
-
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Создайте функцию конструктор Calculator, 
+которая создаёт «расширяемые» объекты калькулятора.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
+function Calculator() {
+  this.methods = {
+    "+" : (a, b) => a + b,
+    "-" : (a, b) => a - b,
+  };
+
+  this.calculate = function(str) {
+    let split = str.split(' '),
+    a = +split[0],
+    operation = split[1],
+    b = +split[2];
+
+    if (isNaN(a) || isNaN(b) || !this.methods[operation]) {
+      return NaN;
+    }
+
+    return this.methods[operation](a, b);
   }
+
+  this.addMethod = function(name, func) {
+    this.methods[name] = func;
+  };
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let calc = new Calculator;
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+console.log( calc.calculate("3 + 7") ); // 10
 
-alert(accumulator.value); // выведет сумму этих значений
+let powerCalc = new Calculator;
+powerCalc.addMethod("*", (a, b) => a * b);
+powerCalc.addMethod("/", (a, b) => a / b);
+powerCalc.addMethod("**", (a, b) => a ** b);
+
+let result = powerCalc.calculate("2 ** 3");
+console.log( result ); // 8

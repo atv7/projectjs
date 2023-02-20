@@ -1,29 +1,26 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Напишите функцию getAverageAge(users), которая принимает массив объектов со 
+свойством age и возвращает средний возраст.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Формула вычисления среднего арифметического значения: (age1 + age2 + ... + ageN) / N.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
+
+function getAverageAge(users) {
+  let sum = 0;
+  for (let user of users) {
+    sum += user.age;
   }
+  return sum / users.length;
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 29 };
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let arr = [ vasya, petya, masha ];
 
-alert(accumulator.value); // выведет сумму этих значений
+console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28

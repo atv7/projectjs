@@ -1,29 +1,20 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
-
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+У вас есть массив объектов user,
+ и в каждом из них есть user.name. Напишите код, который преобразует их в массив имён.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let users = [ vasya, petya, masha ];
+
+let names = []
+for (let user of users) {
+  names.push(user.name);
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
-
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+console.log( names ); // Вася, Петя, Маша

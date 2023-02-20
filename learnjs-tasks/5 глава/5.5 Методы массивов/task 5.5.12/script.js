@@ -1,29 +1,25 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Пусть arr – массив строк.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
+function unique(arr) {
+  let res = [];
+
+  for (let value of arr) {
+    if (!res.includes(value)) {
+      res.push(value);
+    }
   }
+  return res
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let strings = ["кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", ":-O"
+];
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+console.log( unique(strings) ); // кришна, харе, :-O

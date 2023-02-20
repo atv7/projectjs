@@ -1,29 +1,24 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Напишите функцию shuffle(array), которая перемешивает (переупорядочивает случайным образом) элементы массива.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Многократные прогоны через shuffle могут привести к разным последовательностям элементов. Например:
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
-}
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
 
-let accumulator = new Accumulator(1); // начальное значение 1
+} 
+let arr = [1, 2, 3];
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+shuffle(arr);
+// arr = [3, 2, 1]
 
-alert(accumulator.value); // выведет сумму этих значений
+shuffle(arr);
+// arr = [2, 1, 3]
+
+shuffle(arr);
+// arr = [3, 1, 2]
+// ...

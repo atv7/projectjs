@@ -1,29 +1,24 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
-
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Напишите функцию sortByAge(users), которая принимает массив объектов со свойством age и сортирует их по нему.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+function sortByAge(arr) {
+  arr.sort( (a, b) => a.age > b.age ? 1 : -1);
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
 
-alert(accumulator.value); // выведет сумму этих значений
+let arr = [ vasya, petya, masha ];
+
+sortByAge(arr);
+
+// теперь: [vasya, masha, petya]
+console.log(arr[0].name); // Вася
+console.log(arr[1].name); // Маша
+console.log(arr[2].name); // Петя

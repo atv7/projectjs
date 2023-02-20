@@ -1,29 +1,21 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+У нас есть массив строк arr. Нужно получить отсортированную копию, но оставить arr неизменённым.
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Создайте функцию copySorted(arr), которая будет возвращать такую копию.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+function copySorted (arr) {
+  let newArr = arr.slice(0);
+  return newArr.sort();
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let arr = ["HTML", "JavaScript", "CSS"];
 
-alert(accumulator.value); // выведет сумму этих значений
+let sorted = copySorted(arr);
+
+console.log( sorted ); // CSS, HTML, JavaScript
+console.log( arr ); // HTML, JavaScript, CSS (без изменений)
