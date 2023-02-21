@@ -1,29 +1,38 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+В простых случаях циклических ссылок мы можем исключить свойство, из-за которого они возникают,
+ из сериализации по его имени.
 
-Объект, который она создаёт, должен уметь следующее:
+Но иногда мы не можем использовать имя, так как могут быть и другие, нужные, 
+свойства с этим именем во вложенных объектах. Поэтому можно проверять свойство по значению.
 
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Напишите функцию replacer для JSON-преобразования, которая удалит свойства, ссылающиеся на meetup:
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+let room = {
+  number: 23
+};
+
+let meetup = {
+  title: "Совещание",
+  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
+  place: room
+};
+
+// цикличные ссылки
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+console.log(JSON.stringify(meetup, function replacer(key, value) {
+  return (key != "" && value == meetup) ? undefined : value;
+}));
+
+/* в результате должно быть:
+{
+  "title":"Совещание",
+  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
+  "place":{"number":23}
 }
-
-let accumulator = new Accumulator(1); // начальное значение 1
-
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+*/

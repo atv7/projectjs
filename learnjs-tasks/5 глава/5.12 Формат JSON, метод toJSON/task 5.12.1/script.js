@@ -1,29 +1,17 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Преобразуйте user в JSON, затем прочитайте этот JSON в другую переменную.
 
-Объект, который она создаёт, должен уметь следующее:
 
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
-}
+let user = {
+  name: "Василий Иванович",
+  age: 35
+};
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let user2 = JSON.stringify(user);
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+let user3 = JSON.parse(user);

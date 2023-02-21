@@ -1,29 +1,19 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Напишите функцию getSecondsToday(), возвращающую количество секунд с начала сегодняшнего дня.
 
-Объект, который она создаёт, должен уметь следующее:
+Например, если сейчас 10:00, и не было перехода на зимнее/летнее время, то:
 
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+getSecondsToday() == 36000 // (3600 * 10)
+Функция должна работать в любой день, т.е. в ней не должно быть конкретного значения сегодняшней даты.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+function getSecondsToday() {
+  let date = new Date();
+  return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
 
-alert(accumulator.value); // выведет сумму этих значений

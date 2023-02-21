@@ -1,29 +1,24 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Создайте функцию getDateAgo(date, days), возвращающую число, которое было days дней назад от даты date.
 
-Объект, который она создаёт, должен уметь следующее:
+К примеру, если сегодня двадцатое число, то getDateAgo(new Date(), 1) вернёт девятнадцатое 
+и getDateAgo(new Date(), 2) – восемнадцатое.
 
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Функция должна надёжно работать при значении days=365 и больших значениях:
 
 */
+function getDateAgo(date, days) {
+  let updateDate = new Date(date);
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+  updateDate.setDate(date.getDate() - days);
+  return updateDate.getDate();
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
+let date = new Date(2015, 0, 2);
 
-alert(accumulator.value); // выведет сумму этих значений
+console.log( getDateAgo(date, 1) ); // 1, (1 Jan 2015)
+console.log( getDateAgo(date, 2) ); // 31, (31 Dec 2014)
+console.log( getDateAgo(date, 365) ); // 2, (2 Jan 2014)
