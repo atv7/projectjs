@@ -1,29 +1,21 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+ какую структуру данных вы бы предложили использовать для хранения информации о том, когда сообщение было прочитано?
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
-
+В предыдущем задании нам нужно было сохранить только факт прочтения «да или нет». 
+Теперь же нам нужно сохранить дату, и она должна исчезнуть из памяти при удалении «сборщиком мусора» сообщения.
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+let messages = [
+  { text: "Hello", from: "John" },
+  { text: "How goes?", from: "John" },
+  { text: "See you soon", from: "Alice" }
+];
+
+let readDateSet = new WeakMap();
+let time = 0;
+for (let msg of messages) {
+  readDateSet.set(msg, time);
+  time += 1;
 }
-
-let accumulator = new Accumulator(1); // начальное значение 1
-
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений

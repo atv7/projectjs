@@ -1,29 +1,25 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
-
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Напишите функцию getWeekDay(date), показывающую день недели 
+в коротком формате: «ПН», «ВТ», «СР», «ЧТ», «ПТ», «СБ», «ВС».
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
+let days = {
+  '0' : 'ВС',
+  '1' : 'ПН',
+  '2' : 'ВТ',
+  '3' : 'СР',
+  '4' : 'ЧТ',
+  '5' : 'ПТ',
+  '6' : 'СБ',
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+function getWeekDay(date) {
+  let day = date.getDay();
+  return days[day];
+}
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+let date = new Date(2012, 0, 3);  // 3 января 2012 года
+console.log( getWeekDay(date) );        // нужно вывести "ВТ"

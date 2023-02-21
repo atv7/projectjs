@@ -1,29 +1,21 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Напишите деструктурирующее присваивание, которое:
 
-Объект, который она создаёт, должен уметь следующее:
-
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+свойство name присвоит в переменную name.
+свойство years присвоит в переменную age.
+свойство isAdmin присвоит в переменную isAdmin (false, если нет такого свойства)
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
-  }
-}
+let user = {
+  name: "John",
+  years: 30
+};
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let {name, years: age, isAdmin = false} = user;
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+console.log( name ); // John
+console.log( age ); // 30
+console.log( isAdmin ); // false

@@ -1,29 +1,27 @@
 "use strict"
 
 /*
-Создайте функцию-конструктор Accumulator(startingValue).
+Есть объект salaries с произвольным количеством свойств, содержащих заработные платы.
 
-Объект, который она создаёт, должен уметь следующее:
+Напишите функцию sumSalaries(salaries), которая возвращает сумму всех зарплат с помощью метода Object.values 
+и цикла for..of.
 
-Хранить «текущее значение» в свойстве value. Начальное значение устанавливается 
-в аргументе конструктора startingValue.
-Метод read() должен использовать prompt для считывания нового числа и прибавления его к value.
-Другими словами, свойство value представляет собой сумму всех введённых пользователем значений, 
-с учётом начального значения startingValue.
+Если объект salaries пуст, то результат должен быть 0.
 
 */
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
-  this.read = function() {
-    this.newValue = +prompt("Введите новое значение", 0);
-    this.value += this.newValue;
+function sumSalaries(salaries) {
+  let sum = 0;
+  for (let value of Object.values(salaries)) {
+    sum += value;
   }
+  return sum;
 }
 
-let accumulator = new Accumulator(1); // начальное значение 1
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
 
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
-
-alert(accumulator.value); // выведет сумму этих значений
+console.log( sumSalaries(salaries) ); // 650
