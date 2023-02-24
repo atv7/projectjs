@@ -1,38 +1,26 @@
 "use strict"
 
 /*
-В простых случаях циклических ссылок мы можем исключить свойство, из-за которого они возникают,
- из сериализации по его имени.
+В коде ниже класс Rabbit наследует Animal.
 
-Но иногда мы не можем использовать имя, так как могут быть и другие, нужные, 
-свойства с этим именем во вложенных объектах. Поэтому можно проверять свойство по значению.
-
-Напишите функцию replacer для JSON-преобразования, которая удалит свойства, ссылающиеся на meetup:
+К сожалению, объект класса Rabbit не создаётся. Что не так? Исправьте ошибку.
 
 */
 
-let room = {
-  number: 23
-};
+class Animal {
 
-let meetup = {
-  title: "Совещание",
-  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
-  place: room
-};
+  constructor(name) {
+    this.name = name;
+  }
 
-// цикличные ссылки
-room.occupiedBy = meetup;
-meetup.self = meetup;
-
-console.log(JSON.stringify(meetup, function replacer(key, value) {
-  return (key != "" && value == meetup) ? undefined : value;
-}));
-
-/* в результате должно быть:
-{
-  "title":"Совещание",
-  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
-  "place":{"number":23}
 }
-*/
+
+class Rabbit extends Animal {
+  constructor(name) { // обязательно наличие метода super() перед this в дочернем классе
+    this.name = name;
+    this.created = Date.now();
+  }
+}
+
+let rabbit = new Rabbit("Белый кролик"); // Error: this is not defined
+alert(rabbit.name);

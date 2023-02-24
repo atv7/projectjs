@@ -1,38 +1,38 @@
 "use strict"
 
 /*
-В простых случаях циклических ссылок мы можем исключить свойство, из-за которого они возникают,
- из сериализации по его имени.
+Как мы уже знаем, все объекты наследуют от Object.prototype и имеют доступ к «общим» методам объекта, 
+например hasOwnProperty.
 
-Но иногда мы не можем использовать имя, так как могут быть и другие, нужные, 
-свойства с этим именем во вложенных объектах. Поэтому можно проверять свойство по значению.
-
-Напишите функцию replacer для JSON-преобразования, которая удалит свойства, ссылающиеся на meetup:
+В чем разница?
 
 */
 
-let room = {
-  number: 23
-};
-
-let meetup = {
-  title: "Совещание",
-  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
-  place: room
-};
-
-// цикличные ссылки
-room.occupiedBy = meetup;
-meetup.self = meetup;
-
-console.log(JSON.stringify(meetup, function replacer(key, value) {
-  return (key != "" && value == meetup) ? undefined : value;
-}));
-
-/* в результате должно быть:
-{
-  "title":"Совещание",
-  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
-  "place":{"number":23}
+class Rabbit {
+  constructor(name) {
+    this.name = name;
+  }
 }
-*/
+
+let rabbit = new Rabbit("Rab");
+
+// метод hasOwnProperty от Object.prototype
+console.log( rabbit.hasOwnProperty('name') ); // true
+//Но что если мы явно напишем "class Rabbit extends Object" – тогда результат будет отличаться
+//от обычного "class Rabbit"?
+
+// !!В случае выше у нас нет доступа к статическим методам Object
+
+
+//Ниже пример кода с таким наследованием (почему он не работает? исправьте его):
+
+class Rabbit extends Object {
+  constructor(name) {
+    super(); // при вызове конструктора нужен метод super()
+    this.name = name; 
+  }
+}
+
+let rabbit = new Rabbit("Кроль");
+
+console.log( rabbit.hasOwnProperty('name') ); // Ошибка

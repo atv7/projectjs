@@ -1,38 +1,17 @@
 "use strict"
 
 /*
-В простых случаях циклических ссылок мы можем исключить свойство, из-за которого они возникают,
- из сериализации по его имени.
+Почему instanceof в примере ниже возвращает true? Мы же видим, что a не создан с помощью B().
 
-Но иногда мы не можем использовать имя, так как могут быть и другие, нужные, 
-свойства с этим именем во вложенных объектах. Поэтому можно проверять свойство по значению.
-
-Напишите функцию replacer для JSON-преобразования, которая удалит свойства, ссылающиеся на meetup:
 
 */
 
-let room = {
-  number: 23
-};
+function A() {}
+function B() {}
 
-let meetup = {
-  title: "Совещание",
-  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
-  place: room
-};
+A.prototype = B.prototype = {};
 
-// цикличные ссылки
-room.occupiedBy = meetup;
-meetup.self = meetup;
+let a = new A();
 
-console.log(JSON.stringify(meetup, function replacer(key, value) {
-  return (key != "" && value == meetup) ? undefined : value;
-}));
-
-/* в результате должно быть:
-{
-  "title":"Совещание",
-  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
-  "place":{"number":23}
-}
-*/
+alert( a instanceof B ); // true
+// Это происходит т.к. мы переназначили их prototype на {}, а instanceof() проверяет именно prototype
