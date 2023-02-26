@@ -1,17 +1,33 @@
 "use strict"
 
-/*
-Почему instanceof в примере ниже возвращает true? Мы же видим, что a не создан с помощью B().
+class calculation {
 
+    constructor(firstNumber=0, secondNumber=0) {
+        this.firstNumber = BigInt(firstNumber);
+        this.secondNumber = BigInt(secondNumber);
+    }
 
-*/
+    addition() {
+        return (this.firstNumber + this.secondNumber).toString();
+    }
 
-function A() {}
-function B() {}
+    subtraction() {
+        return (this.firstNumber - this.secondNumber).toString();
+    }
 
-A.prototype = B.prototype = {};
+    division() {
+        return (this.firstNumber / this.secondNumber).toString();
+    }
 
-let a = new A();
+    multiplication() {
+        return (this.firstNumber * this.secondNumber).toString();
+    }
+}
 
-alert( a instanceof B ); // true
-// Это происходит т.к. мы переназначили их prototype на {}, а instanceof() проверяет именно prototype
+let test = new calculation("89476546456834756834456534456847645473446753688546846465748768876768794955456679568797567889", "11")
+console.log(test.addition());
+console.log(test.subtraction());
+console.log(test.division());
+console.log(test.multiplication());
+
+export {calculation};
