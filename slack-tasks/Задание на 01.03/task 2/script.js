@@ -51,7 +51,7 @@ console.log(test.subtraction());
 console.log(test.division());
 console.log(test.multiplication());
 
-let test2 = new calculation('11', '4');
+let test2 = new calculation('-11', '4');
 console.log(test2.division());
 
 // export {calculation};
