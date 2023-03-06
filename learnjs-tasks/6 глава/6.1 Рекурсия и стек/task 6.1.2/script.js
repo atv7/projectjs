@@ -1,19 +1,7 @@
 "use strict"
 
-/*
-Взгляните на следующий код:
+function factorial(n) {
+    return (n > 1) ? n * factorial(n - 1) : 1;
+}
 
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
-*/
-
-let str = "Привет";
-
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
-
-console.log(str.test);
+console.log(factorial(5));

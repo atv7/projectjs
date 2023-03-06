@@ -1,19 +1,16 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+Что выведет функция?
 
 */
 
-let str = "Привет";
-
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
-
-console.log(str.test);
+function f() {
+    console.log( this ); // ?
+  }
+  
+  let user = {
+    g: f.bind(null)
+  };
+  
+  user.g(); // выведет null, так как в bind мы не передали this

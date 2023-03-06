@@ -1,19 +1,30 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+Напишите функцию printNumbers(from, to), которая выводит число каждую секунду, начиная от from и заканчивая to.
 
 */
 
-let str = "Привет";
+// function printNumbers(from, to) {
+//     setTimeout(function print() {
+//         console.log(from);
+//         if (from < to) {
+//             setTimeout(print, 1000);
+//         }
+//         from++   
+//     }, 1000);
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+// }
 
-console.log(str.test);
+function printNumbers(from, to) {
+    let timerId = setInterval(function print() {
+        console.log(from);
+        if (from == to) {
+            clearInterval(timerId);
+        }
+        from++
+    }, 1000)
+}
+    
+
+printNumbers(2, 8);

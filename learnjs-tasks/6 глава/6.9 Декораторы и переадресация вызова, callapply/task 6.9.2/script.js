@@ -1,19 +1,26 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
+Создайте декоратор delay(f, ms), который задерживает каждый вызов f на ms миллисекунд.
 */
 
-let str = "Привет";
+function f(x) {
+    console.log(x);
+  }
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+function delay(f, ms) {
 
-console.log(str.test);
+    return function(...args) {
+        let saveThis = this; 
+        setTimeout(function() {
+          f.apply(saveThis, args); 
+        }, ms);
+      };
+}
+  
+  // создаём обёртки
+  let f1000 = delay(f, 1000);
+  let f1500 = delay(f, 1500);
+  
+  f1000("test"); // показывает "test" после 1000 мс
+  f1500("test"); // показывает "test" после 1500 мс

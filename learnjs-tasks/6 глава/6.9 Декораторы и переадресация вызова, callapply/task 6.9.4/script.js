@@ -1,19 +1,48 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
+Создайте «тормозящий» декоратор throttle(f, ms), который возвращает обёртку, передавая вызов 
+в f не более одного раза в ms миллисекунд. Те вызовы, которые попадают в период «торможения», игнорируются.
 */
 
-let str = "Привет";
+function f(a) {
+    console.log(a)
+  }
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+function throttle(func, ms) {
 
-console.log(str.test);
+    let ready = false;
+
+    function wrapper() {
+        
+        func.apply(this, savedArgs);
+
+        if (ready) {
+            let savedArgs = arguments;
+            let savedThis = this;
+            return;
+        }
+
+        ready = true;
+
+        setTimeout(function() {
+            ready = false;
+            if (ready) {
+                wrapper.apply(savedThis, savedArgs);
+                savedArgs = savedThis = null;
+            }
+        }, ms)
+    }
+
+    return wrapper;
+}
+  
+// f1000 передаёт вызовы f максимум раз в 1000 мс
+let f1000 = throttle(f, 1000);
+  
+f1000(1); // показывает 1
+f1000(2); // (ограничение, 1000 мс ещё нет)
+f1000(3); // (ограничение, 1000 мс ещё нет)
+    
+// когда 1000 мс истекли ...
+// ...выводим 3, промежуточное значение 2 было проигнорировано

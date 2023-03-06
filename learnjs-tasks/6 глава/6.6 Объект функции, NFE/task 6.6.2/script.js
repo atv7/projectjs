@@ -1,19 +1,28 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+Напишите функцию sum, которая бы работала следующим образом:
 
 */
 
-let str = "Привет";
+function sum(a) {
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+    let currentSum = a;
+  
+    function func(b) {
+      currentSum += b;
+      return func;
+    }
+  
+    func.valueOf = function() {
+      return currentSum;
+    };
+  
+    return func;
+  }
 
-console.log(str.test);
+console.log(sum(1)(2)); // 1 + 2
+console.log(sum(1)(2)(3)); // 1 + 2 + 3
+console.log(sum(5)(-1)(2)); 
+console.log(sum(6)(-1)(-2)(-3));
+console.log(sum(0)(1)(2)(3)(4)(5));

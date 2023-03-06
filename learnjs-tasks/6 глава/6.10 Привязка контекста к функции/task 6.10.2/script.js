@@ -1,19 +1,17 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
+В свойство функции записано значение. Изменится ли оно после применения bind? Обоснуйте ответ.
 */
 
-let str = "Привет";
-
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
-
-console.log(str.test);
+function sayHi() {
+    console.log( this.name );
+  }
+  sayHi.test = 5;
+  
+  let bound = sayHi.bind({
+    name: "Вася"
+  });
+  
+  console.log( bound.test ); // Выводит undefinded, т.к. мы привязывали к bound уже другой объект
+                            // у которого нет свойств test

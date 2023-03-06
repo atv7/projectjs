@@ -1,19 +1,28 @@
-"use strict"
+'use strict'
 
-/*
-Взгляните на следующий код:
+function sumTo(n) {
+    let count = 0;
+    for (let i = 0; i <= n+1; i++) {
+        count += i;
+    }
+    return count;
+}
 
-let str = "Привет";
+console.log(sumTo(100));
 
-str.test = 5;
 
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+function sumToRec(n) {
+    let count = 0;
+    return (n > 1) ? count = n + sumToRec(n-1) : count + 1;
+}
 
-*/
 
-let str = "Привет";
+console.log(sumToRec(100));
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+function sumToProgressive(n) {
+    let count = 0;
+    count = ((1 + n) / 2 ) * n
+    return count;
+}
 
-console.log(str.test);
+console.log(sumToProgressive(100));

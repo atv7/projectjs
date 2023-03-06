@@ -1,19 +1,35 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
+Создайте декоратор spy(func), который должен возвращать обёртку, которая сохраняет все 
+вызовы функции в своём свойстве calls.
 
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+Каждый вызов должен сохраняться как массив аргументов.
 
 */
 
-let str = "Привет";
+function work(a, b) {
+    console.log( a + b ); // произвольная функция или метод
+  }
+  
+  work = spy(work);
+  
+  work(1, 2); // 3
+  work(4, 5); // 9
+  
+  for (let args of work.calls) {
+    console.log( 'call:' + args.join() ); // "call:1,2", "call:4,5"
+  }
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+function spy(func) {
 
-console.log(str.test);
+    function wrapper(...args) {
+
+      wrapper.calls.push(args);
+      return func.apply(this, args);
+    }
+  
+    wrapper.calls = [];
+  
+    return wrapper;
+  }

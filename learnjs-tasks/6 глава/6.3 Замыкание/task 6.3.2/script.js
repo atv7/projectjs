@@ -1,19 +1,26 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
+Здесь объект счётчика создан с помощью функции-конструктора.
 
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+Будет ли он работать? Что покажет?
 
 */
 
-let str = "Привет";
-
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
-
-console.log(str.test);
+function Counter() {
+    let count = 0;
+  
+    this.up = function() {
+      return ++count;
+    };
+    this.down = function() {
+      return --count;
+    };
+  }
+  
+  let counter = new Counter();
+  
+  console.log( counter.up() ); // 1
+  console.log( counter.up() ); // 2
+  console.log( counter.down() ); // 1
+  // Обе вложенные функции в конструкторе Counter имеют одно и тоже внешнее лексическое окружение

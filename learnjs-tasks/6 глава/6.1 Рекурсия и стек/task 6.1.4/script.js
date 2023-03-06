@@ -1,19 +1,44 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
 
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+Напишите функцию printList(list), которая выводит элементы списка по одному.
 
 */
 
-let str = "Привет";
+let list = {
+    value: 1,
+    next: {
+      value: 2,
+      next: {
+        value: 3,
+        next: {
+          value: 4,
+          next: null
+        }
+      }
+    }
+  };
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+// function printList(list) {
+//     if (!list.next) {
+//         console.log(list.value);
+//     } else {
+//     console.log(list.value);
+//     printList(list.next)
+//     }
+// }
 
-console.log(str.test);
+// printList(list);
+
+
+function printList(list) {
+    let tmp = list
+
+    while(tmp) {
+        console.log(tmp.value);
+        tmp = tmp.next;
+    }
+}
+
+printList(list);

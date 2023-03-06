@@ -1,19 +1,23 @@
 "use strict"
 
-/*
-Взгляните на следующий код:
+/* Написать функцию возвращающую n-тое число Фибаначи*/
 
-let str = "Привет";
 
-str.test = 5;
+function fin(n) {
+    let a = 1;
+    let b = 1;
+    let num = 0
+    for (let i = 3; i <= n; i++) {
+        num = a + b;
+        a = b;
+        b = num;
+    }
+    return b;
+}
 
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+console.log(fin(7));
 
-*/
 
-let str = "Привет";
-
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
-
-console.log(str.test);
+function fib(n) {
+    return n <= 1 ? n : fib(n - 1) + fib(n - 2);
+  }

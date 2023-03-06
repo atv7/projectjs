@@ -1,19 +1,21 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
+У нас есть массив объектов, который нужно отсортировать:
 
 */
 
-let str = "Привет";
+let users = [
+    { name: "John", age: 20, surname: "Johnson" },
+    { name: "Pete", age: 18, surname: "Peterson" },
+    { name: "Ann", age: 19, surname: "Hathaway" }
+  ];
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+function byField(atr) {
+    return function(a, b) {
+        return (a[atr] > b[atr]) ? 1 : -1;
+    }
+}
 
-console.log(str.test);
+console.log(users.sort(byField('name')));
+console.log(users.sort(byField('age')));
