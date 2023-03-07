@@ -1,13 +1,20 @@
-let a = 50;
+"use strict"
 
-switch(a) {
-    case 49:
-        console.log('net');
-        break
-    case 51:
-        console.log('net');
-        break
-    case 50:
-        console.log('da');
-        break
+
+const animal = {
+    eats: true,
+    stop() {
+        console.log('stopped');
+    },
+    lala: () => console.log('lala'),
 }
+
+const rabbit = {
+    eyes: 'yes',
+}
+
+Object.setPrototypeOf(rabbit, animal);
+
+console.log(rabbit.eats);
+rabbit.stop();
+rabbit.lala();

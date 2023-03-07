@@ -1,38 +1,26 @@
 "use strict"
 
 /*
-В простых случаях циклических ссылок мы можем исключить свойство, из-за которого они возникают,
- из сериализации по его имени.
+Добавьте всем функциям в прототип метод defer(ms), который возвращает обёртку, 
+откладывающую вызов функции на ms миллисекунд.
 
-Но иногда мы не можем использовать имя, так как могут быть и другие, нужные, 
-свойства с этим именем во вложенных объектах. Поэтому можно проверять свойство по значению.
-
-Напишите функцию replacer для JSON-преобразования, которая удалит свойства, ссылающиеся на meetup:
-
+Например, должно работать так:
 */
 
-let room = {
-  number: 23
-};
+if (!Function.prototype.defer) {
 
-let meetup = {
-  title: "Совещание",
-  occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
-  place: room
-};
+  Function.prototype.defer = function(ms) {
+    let func = this;
+    return function(...args) {
+      setTimeout(() => func.apply(this, args), ms)
+    }
+  }
 
-// цикличные ссылки
-room.occupiedBy = meetup;
-meetup.self = meetup;
-
-console.log(JSON.stringify(meetup, function replacer(key, value) {
-  return (key != "" && value == meetup) ? undefined : value;
-}));
-
-/* в результате должно быть:
-{
-  "title":"Совещание",
-  "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
-  "place":{"number":23}
 }
-*/
+
+
+function f(a, b) {
+  console.log( a + b );
+}
+
+f.defer(1000)(1, 2); // выведет 3 через 1 секунду.

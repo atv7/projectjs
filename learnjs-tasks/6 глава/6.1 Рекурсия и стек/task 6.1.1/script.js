@@ -21,7 +21,7 @@ console.log(sumToRec(100));
 
 function sumToProgressive(n) {
     let count = 0;
-    count = ((1 + n) / 2 ) * n
+    count = ((1 + n) / 2 ) * n;
     return count;
 }
 
