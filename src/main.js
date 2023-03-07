@@ -14,6 +14,7 @@ console.log(sumTo(100));
 function sumToRec(n) {
     let count = 0;
     return (n > 1) ? count = n + sumToRec(n-1) : count + 1;
+    
 }
 
 
