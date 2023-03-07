@@ -1,19 +1,29 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
+Перепишите один из примеров раздела Цепочка промисов, используя async/await вместо .then/catch:
 */
 
-let str = "Привет";
+// function loadJson(url) {
+//     return fetch(url)
+//       .then(response => {
+//         if (response.status == 200) {
+//           return response.json();
+//         } else {
+//           throw new Error(response.status);
+//         }
+//       })
+//   }
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+async function loadJson(url) {
+    let responce = await fetch(url);
+  
+    if (responce.status == 200) {
+        return await responce.json();
+    }
 
-console.log(str.test);
+    throw new Error(responce.status)
+}
+
+loadJson('no-such-user.json') // (3)
+    .catch(alert); // Error: 404

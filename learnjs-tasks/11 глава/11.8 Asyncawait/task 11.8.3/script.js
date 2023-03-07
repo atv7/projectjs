@@ -1,19 +1,15 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
-
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
+Есть «обычная» функция. Как можно внутри неё получить результат выполнения async–функции?
 */
 
-let str = "Привет";
-
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
-
-console.log(str.test);
+async function wait() {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  
+    return 10;
+  }
+  
+  function f() {
+    wait().then(result => console.log(result));
+  }

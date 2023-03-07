@@ -1,19 +1,54 @@
 "use strict"
 
 /*
-Взгляните на следующий код:
+Ниже пример из раздела Цепочка промисов, перепишите его, используя async/await вместо .then/catch.
 
-let str = "Привет";
-
-str.test = 5;
-
-alert(str.test);
-Как вы думаете, это сработает? Что выведется на экран?
-
+В функции demoGithubUser замените рекурсию на цикл: используя async/await, сделать это будет просто.
 */
 
-let str = "Привет";
+class HttpError extends Error {
+    constructor(response) {
+      super(`${response.status} for ${response.url}`);
+      this.name = 'HttpError';
+      this.response = response;
+    }
+  }
+  
+  async function loadJson(url) {
 
-str.test = 5; // ошибка, т.к. примитивы не могут хранить дополнительные данные
+    let response = await fetch(url);
 
-console.log(str.test);
+    if (response.status == 200) {
+        return await response.json();
+      } else {
+        throw new HttpError(response);
+      }
+    }
+  
+  // Запрашивать логин, пока github не вернёт существующего пользователя.
+  
+  async function demoGithubUser() {
+
+    let user;
+    while(true) {
+        let name = prompt("Введите логин?", "atv");
+        try {
+        user = await loadJson(`https://api.github.com/users/${name}`);
+        break;
+        } catch(err) {
+            if (err instanceof HttpError && err.response.status == 404) {
+                console.log("Такого пользователя не существует, пожалуйста, повторите ввод.");
+        } else {
+            throw err;
+        }
+        }
+    }
+
+    console.log(`Полное имя: ${user.name}.`);
+    return user;
+    
+}
+
+demoGithubUser();
+
+
